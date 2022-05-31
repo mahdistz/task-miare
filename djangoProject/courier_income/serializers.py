@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import DailySalary, DecreaseOfIncome, IncreaseOfIncome, WeeklySalary, IncomeOfCourier, Courier, CommonInfo
+from .models import DailySalary, DecreaseOfIncome, IncreaseOfIncome, WeeklySalary, IncomeOfCourier, Courier
 
 
-class CourierSerializer(serializers.HyperlinkedModelSerializer):
+class CourierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Courier
         fields = [
@@ -10,64 +10,56 @@ class CourierSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-class CommonInfoSerializer(serializers.HyperlinkedModelSerializer):
-    courier = serializers.StringRelatedField(read_only=True, required=False)
-
-    class Meta:
-        model = CommonInfo
-        fields = ['date', ]
-
-
-class IncomeOfCourierSerializer(serializers.HyperlinkedModelSerializer):
+class IncomeOfCourierSerializer(serializers.ModelSerializer):
     courier = serializers.StringRelatedField(read_only=True, required=False)
     date = serializers.StringRelatedField(read_only=True, required=False)
 
     class Meta:
         model = IncomeOfCourier
         fields = [
-            'income_of_travel', 'status',
+            'income_of_travel', 'courier', 'date',
         ]
 
 
-class IncreaseOfIncomeSerializer(serializers.HyperlinkedModelSerializer):
+class IncreaseOfIncomeSerializer(serializers.ModelSerializer):
     courier = serializers.StringRelatedField(read_only=True, required=False)
     date = serializers.StringRelatedField(read_only=True, required=False)
 
     class Meta:
         model = IncreaseOfIncome
         fields = [
-            'increase_income', 'status',
+            'increase_income', 'courier', 'date',
         ]
 
 
-class DecreaseOfIncomeSerializer(serializers.HyperlinkedModelSerializer):
+class DecreaseOfIncomeSerializer(serializers.ModelSerializer):
     courier = serializers.StringRelatedField(read_only=True, required=False)
     date = serializers.StringRelatedField(read_only=True, required=False)
 
     class Meta:
         model = DecreaseOfIncome
         fields = [
-            'decrease_income', 'status',
+            'decrease_income', 'courier', 'date',
         ]
 
 
-class DailySalarySerializer(serializers.HyperlinkedModelSerializer):
+class DailySalarySerializer(serializers.ModelSerializer):
     courier = serializers.StringRelatedField(read_only=True, required=False)
     date = serializers.StringRelatedField(read_only=True, required=False)
 
     class Meta:
         model = DailySalary
         fields = [
-            'daily_salary', 'status',
+            'daily_salary', 'courier', 'date',
         ]
 
 
-class WeeklySalarySerializer(serializers.HyperlinkedModelSerializer):
+class WeeklySalarySerializer(serializers.ModelSerializer):
     courier = serializers.StringRelatedField(read_only=True, required=False)
     date = serializers.StringRelatedField(read_only=True, required=False)
 
     class Meta:
         model = WeeklySalary
         fields = [
-            'weekly_salary',
+            'weekly_salary', 'courier', 'date',
         ]
